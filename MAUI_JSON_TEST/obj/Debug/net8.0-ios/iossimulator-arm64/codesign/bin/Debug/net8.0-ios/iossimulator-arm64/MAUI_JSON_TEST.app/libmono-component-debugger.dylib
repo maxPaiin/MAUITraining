@@ -1,0 +1,1 @@
+-v --force --timestamp=none --sign - /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-ios/iossimulator-arm64/MAUI_JSON_TEST.app/libmono-component-debugger.dylib

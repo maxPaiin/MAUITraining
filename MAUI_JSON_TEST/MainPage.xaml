@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:MAUI_JSON_TEST.ViewModel"
+             x:Class="MAUI_JSON_TEST.MainPage">
+    
+    <ContentPage.BindingContext>
+        <viewModel:MainViewModel />
+    </ContentPage.BindingContext> 
+    
+    <ContentPage.Resources>
+        <!-- <Style TargetType="Editor"> -->
+        <!--     <Setter Property="WidthRequest" Value="198"/> -->
+        <!--     <Setter Property="BackgroundColor" Value="LightGray" /> -->
+        <!--     <Setter Property="TextColor" Value="Black" /> -->
+        <!--     <Setter Property="Margin" Value="2"/> -->
+        <!--     <Setter Property="Shadow" Value="None"/> -->
+        <!-- </Style> -->
+    </ContentPage.Resources>
+    
+    <Grid RowDefinitions="Auto,*" Margin="10">
+        <VerticalStackLayout Grid.Row="0" Spacing="10">
+            <HorizontalStackLayout>
+                <Border Stroke="{Binding BorderColor}"
+                        StrokeShape="RoundRectangle"
+                        StrokeThickness="1"
+                        Margin="5"
+                        WidthRequest="290">
+                    
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BordTouch}" />
+                    </Border.GestureRecognizers>
+                    
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="Black"
+                            Opacity="0.1"
+                            Offset="10,10"
+                            Radius="3"/>
+                    </Border.Shadow>
+                    
+                    <Editor Placeholder="Please input your Keyword" 
+                            Text="{Binding SearchText}" />
+                </Border>
+            
+                <Button Text="Search" Command="{Binding SearchCommand}" IsEnabled="{Binding isSearchEnabled}" Margin="5"/>
+            </HorizontalStackLayout>
+            <Picker
+                Title="Which sort"
+                ItemsSource="{Binding SortOptions}"
+                SelectedItem="{Binding SelectedSort}" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Repositories}" SelectionMode="Single" SelectionChanged="ChoseItem">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="5" Margin="5" BorderColor="Gray" InputTransparent="True">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding owner.login, StringFormat='ownerName: {0}'}" />
+                            <Label Text="{Binding name, StringFormat='name: {0}'}" />
+                            <Label Text="{Binding stargazers_count, StringFormat='stargazersCount: {0}'}" />
+                            <Label Text="{Binding forks_count, StringFormat='forksCount: {0}'}"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

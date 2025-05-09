@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MAUI_JSON_TEST.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MAUI_JSON_TEST"
+    Shell.FlyoutBehavior="Disabled"
+    Title="MAUI_JSON_TEST">
+
+    <ShellContent
+        Title="Git_Search"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Shell.NavBarIsVisible="False"
+        Route="MainPage" />
+
+</Shell>
