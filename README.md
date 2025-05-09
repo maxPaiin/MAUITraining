@@ -9,7 +9,6 @@ Hi,
 
   I think MAUI is a really powerful framework. Whether it’s the right choice for most commercial projects is a separate discussion — but personally, I’m really interested in it. It feels like a big step toward the ideal of “Write once, Run anywhere.”(Yes ,this’s Java’s slogan.) So I’m well-willed to keep learning more about it.
 
-IDE:Rider（MacOS（arm））
-sdk version: 8.0.408
+IDE:Rider（MacOS（arm））<br>sdk version: 8.0.408
 
 May God bless your work and learning.
