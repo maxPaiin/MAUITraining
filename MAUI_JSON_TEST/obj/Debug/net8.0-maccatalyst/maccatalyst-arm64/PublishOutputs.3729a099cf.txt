@@ -34,6 +34,8 @@
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-maccatalyst/maccatalyst-arm64/publish/../MAUI_JSON_TEST.app/Contents/MonoBundle/zh-Hans/Microsoft.Maui.Controls.resources.dll
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-maccatalyst/maccatalyst-arm64/publish/../MAUI_JSON_TEST.app/Contents/MonoBundle/zh-Hant/Microsoft.Maui.Controls.resources.dll
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-maccatalyst/maccatalyst-arm64/publish/../MAUI_JSON_TEST.app/Contents/MonoBundle/runtimeconfig.bin
+/Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-maccatalyst/maccatalyst-arm64/publish/../MAUI_JSON_TEST.app/Contents/MonoBundle/CommunityToolkit.Maui.dll
+/Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-maccatalyst/maccatalyst-arm64/publish/../MAUI_JSON_TEST.app/Contents/MonoBundle/CommunityToolkit.Maui.Core.dll
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-maccatalyst/maccatalyst-arm64/publish/../MAUI_JSON_TEST.app/Contents/MonoBundle/Microsoft.Extensions.Configuration.dll
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-maccatalyst/maccatalyst-arm64/publish/../MAUI_JSON_TEST.app/Contents/MonoBundle/Microsoft.Extensions.Configuration.Abstractions.dll
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-maccatalyst/maccatalyst-arm64/publish/../MAUI_JSON_TEST.app/Contents/MonoBundle/Microsoft.Extensions.DependencyInjection.dll

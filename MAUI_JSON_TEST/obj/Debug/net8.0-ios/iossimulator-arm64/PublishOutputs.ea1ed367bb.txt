@@ -34,6 +34,8 @@
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-ios/iossimulator-arm64/publish/../MAUI_JSON_TEST.app/zh-Hans/Microsoft.Maui.Controls.resources.dll
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-ios/iossimulator-arm64/publish/../MAUI_JSON_TEST.app/zh-Hant/Microsoft.Maui.Controls.resources.dll
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-ios/iossimulator-arm64/publish/../MAUI_JSON_TEST.app/runtimeconfig.bin
+/Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-ios/iossimulator-arm64/publish/../MAUI_JSON_TEST.app/CommunityToolkit.Maui.dll
+/Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-ios/iossimulator-arm64/publish/../MAUI_JSON_TEST.app/CommunityToolkit.Maui.Core.dll
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-ios/iossimulator-arm64/publish/../MAUI_JSON_TEST.app/Microsoft.Extensions.Configuration.dll
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-ios/iossimulator-arm64/publish/../MAUI_JSON_TEST.app/Microsoft.Extensions.Configuration.Abstractions.dll
 /Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/bin/Debug/net8.0-ios/iossimulator-arm64/publish/../MAUI_JSON_TEST.app/Microsoft.Extensions.DependencyInjection.dll

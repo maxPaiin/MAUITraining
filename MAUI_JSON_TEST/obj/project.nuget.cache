@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "X/IOH6wRCVo=",
+  "dgSpecHash": "rWabcfVF+B0=",
   "success": true,
   "projectFilePath": "/Users/painmax/Documents/C_sharp/MAUI_JSON_TEST/MAUI_JSON_TEST/MAUI_JSON_TEST.csproj",
   "expectedPackageFiles": [
+    "/Users/painmax/.nuget/packages/communitytoolkit.maui/8.0.0/communitytoolkit.maui.8.0.0.nupkg.sha512",
+    "/Users/painmax/.nuget/packages/communitytoolkit.maui.core/8.0.0/communitytoolkit.maui.core.8.0.0.nupkg.sha512",
     "/Users/painmax/.nuget/packages/googlegson/2.10.1.4/googlegson.2.10.1.4.nupkg.sha512",
     "/Users/painmax/.nuget/packages/microsoft.extensions.configuration/8.0.0/microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "/Users/painmax/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",

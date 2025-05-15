@@ -6,6 +6,8 @@ using Pojo;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Microsoft.Maui.Storage;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 
 namespace MAUI_JSON_TEST.ViewModel
 {
@@ -18,11 +20,10 @@ namespace MAUI_JSON_TEST.ViewModel
         
         public MainViewModel()
         {
-            // SelectedSort = SortOptions.First();
             SelectedSort = Preferences.Get("selected_sort",SortOptions.First());
             SearchText = Preferences.Get("search_text",string.Empty);
+            isShowNoDataMessage = true;
             SearchCommand = new Command(async () => await SearchAsync());
-            // if (string.IsNullOrWhiteSpace(SearchText)) return; 
         }
         
         public string SelectedSort
@@ -43,13 +44,11 @@ namespace MAUI_JSON_TEST.ViewModel
             {
                 _searchText = value;
                 Preferences.Set("search_text",value);
-                // OnPropertyChanged(nameof(SearchText));
                 isSearchEnabled = !string.IsNullOrWhiteSpace(value) && value.All(c => c <= 127 && c != ' ');
             }
         }
 
         private bool _isSearchEnabled;
-
         public bool isSearchEnabled
         {
             get => _isSearchEnabled;
@@ -66,50 +65,81 @@ namespace MAUI_JSON_TEST.ViewModel
         public ICommand SearchCommand { get; }
         private async Task SearchAsync()
         {
-            var repos = await _service.SearchRepositoriesAsync(SearchText, SelectedSort);
-            Repositories.Clear();
-            foreach (var repo in repos)
+            IsLoading = true;
+            if (IsLoading)
             {
-                Repositories.Add(repo);
+                isShowNoDataMessage = false;
             }
-            // Console.WriteLine($"keyword: {SearchText}, sort: {SelectedSort}");
-            // Console.WriteLine($"respond count: {repos.Count}");
-        }
-        
-        private bool _isTouch;
-        public bool isTouch
-        {
-            get => _isTouch;
-            set
+            
+            Repositories.Clear();
+            try
             {
-                if (_isTouch != value)
+                var repos = await _service.SearchRepositories(SearchText, SelectedSort, progress => LoadingProgress = progress);
+                foreach (var repo in repos)
                 {
-                    _isTouch = value;
-                    OnPropertyChanged(nameof(isTouch));
-                    OnPropertyChanged(nameof(BorderColor));
+                    Repositories.Add(repo);
+                }
+            }
+            catch
+            {
+                var snackbar = Snackbar.Make(
+                    "can't connect try again",
+                    async () => await SearchAsync(),
+                    "Retry",
+                    TimeSpan.FromSeconds(10));
+                await snackbar.Show();
+            }
+            finally
+            {
+                IsLoading = false;
+                if (!IsLoading || Repositories.Count == 0)
+                {
+                    isShowNoDataMessage = true;
                 }
             }
         }
 
-         public Color BorderColor => isTouch ? Colors.Blue : Colors.LightGray;
-         
-         // public Color BorderColor
-         // {
-         //     get
-         //     {
-         //         if (isTouch) 
-         //         {
-         //             return Colors.Blue;
-         //         }else
-         //         {
-         //             return Colors.LightGray;
-         //         }
-         //     }
-         // }
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
 
-         public ICommand BordTouch => new Command(()=> isTouch = true );
-         // public ICommand BordRelease => new Command(() => isTouch = false );
-         
+        private double _loadingProgress;
+
+        public double LoadingProgress
+        {
+            get=>_loadingProgress;
+            set
+            {
+                if (_loadingProgress != value)
+                {
+                    _loadingProgress = value;
+                    OnPropertyChanged(nameof(LoadingProgress));
+                }
+            }
+        }
+
+        private bool _isShowNoDataMessage;
+
+        public bool isShowNoDataMessage
+        {
+            get => _isShowNoDataMessage;
+            set
+            {
+                if (_isShowNoDataMessage != value)
+                {
+                    _isShowNoDataMessage = value;
+                    OnPropertyChanged(nameof(isShowNoDataMessage));
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MAUI_JSON_TEST")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+da2999d365201d5d039823da2a748c7180fb6beb")]
 [assembly: System.Reflection.AssemblyProductAttribute("MAUI_JSON_TEST")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MAUI_JSON_TEST")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

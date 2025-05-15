@@ -16,8 +16,6 @@ public partial class MainPage : ContentPage
             if (e.CurrentSelection.FirstOrDefault() is Respond repo)
             {
                 await Launcher.Default.OpenAsync(repo.html_url);
-                // await Browser.OpenAsync(repo.html_url, BrowserLaunchMode.SystemPreferred); 
-                Console.WriteLine($"open: {repo.html_url}");
             }
         }
         catch (Exception ex)
