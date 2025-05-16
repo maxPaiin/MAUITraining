@@ -74,7 +74,7 @@ namespace MAUI_JSON_TEST.ViewModel
             Repositories.Clear();
             try
             {
-                var repos = await _service.SearchRepositories(SearchText, SelectedSort, progress => LoadingProgress = progress);
+                var repos = await _service.SearchRepositories(SearchText, SelectedSort, new Progress<double>(value => LoadingProgress = value));
                 foreach (var repo in repos)
                 {
                     Repositories.Add(repo);
