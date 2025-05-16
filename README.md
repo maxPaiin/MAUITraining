@@ -1,3 +1,7 @@
+5.16.2025 update</br>
+I’ve made some UI adjustments and added a Snackbar that appears when there’s a network communication issue.
+
+---------------------------------------------------------
 Hi, 
   This is my first .NET MAUI project — just a small demo I built to practice working with REST APIs.
 
