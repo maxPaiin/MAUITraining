@@ -2,17 +2,20 @@
 I’ve made some UI adjustments and added a Snackbar that appears when there’s a network communication issue.
 
 ---------------------------------------------------------
-Hi, 
-  This is my first .NET MAUI project — just a small demo I built to practice working with REST APIs.
+A simple .NET MAUI demo app that uses REST APIs and follows the MVVM architecture.  
+Built for practice and to explore .NET MAUI capabilities.
 
-  I started learning to code about a year ago, beginning with Java. Just recently — about a month ago — I began exploring C# and .NET MAUI, so I’m still very new to both.
+Built with Rider on macOS (ARM) using .NET MAUI SDK 8.0.408</br>
+Developed on: May 8, 2025</br>
 
-  Built this demo on 8 May 2025. It took me around seven hours to complete — coding and learning as I went. I got help from AI (ChatGPT and Gemini) and I also referred to Microsoft’s official MAUI documentation: <br>https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui?view=net-maui-9.0
+Project Structure</br>
 
-  And watch Gerald Versluis’s YouTube video:<br> https://www.youtube.com/@jfversluis  
+This project is built using the MVVM architecture pattern. Below is the structure and role of each main folder:
 
-  I think MAUI is a really powerful framework. Whether it’s the right choice for most commercial projects is a separate discussion — but personally, I’m really interested in it. It feels like a big step toward the ideal of “Write once, Run anywhere.”(Yes ,this’s Java’s slogan.) So I’m well-willed to keep learning more about it.
-
-IDE:Rider（MacOS（arm））<br>sdk version: 8.0.408
-
-May God bless your work and learning.
+MAUITraining/</br>
+├── Models/           # Data models (Repository.cs)</br>
+├── ViewModels/       # ViewModels responsible for data binding and logic (MainViewModel.cs)</br>
+├── Views/            # UI pages (MainPage.xaml) with bindings to ViewModels</br>
+├── Services/         # API communication using HttpClient (GitHubApiService.cs)</br>
+├── App.xaml.cs       # App lifecycle entry</br>
+└── MauiProgram.cs    # DI container and service registration</br>
