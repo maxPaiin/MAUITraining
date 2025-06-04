@@ -13,9 +13,9 @@ Project Structure</br>
 This project is built using the MVVM architecture pattern. Below is the structure and role of each main folder:
 
 MAUITraining/</br>
-├── Models/                       ### Data models (Repository.cs)</br>
-├── ViewModels/                   ### ViewModels responsible for data binding and logic (MainViewModel.cs)</br>
-├── Views/                        ### UI pages (MainPage.xaml) with bindings to ViewModels</br>
-├── Services/                     ### API communication using HttpClient (GitHubApiService.cs)</br>
-├── App.xaml.cs                   ### App lifecycle entry</br>
-└── MauiProgram.cs                ### DI container and service registration</br>
+├── Models/                      【Data models (Repository.cs)】</br>
+├── ViewModels/                  【ViewModels responsible for data binding and logic (MainViewModel.cs)】</br>
+├── Views/                       【UI pages (MainPage.xaml) with bindings to ViewModels】</br>
+├── Services/                    【API communication using HttpClient (GitHubApiService.cs)】</br>
+├── App.xaml.cs                  【App lifecycle entry】</br>
+└── MauiProgram.cs               【Dependency injection setup】</br>
