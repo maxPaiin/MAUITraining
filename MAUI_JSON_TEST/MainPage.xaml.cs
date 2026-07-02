@@ -13,9 +13,9 @@ public partial class MainPage : ContentPage
     {
         try
         {
-            if (e.CurrentSelection.FirstOrDefault() is Respond repo)
+            if (e.CurrentSelection.FirstOrDefault() is Respond { HtmlUrl: not null } repo)
             {
-                await Launcher.Default.OpenAsync(repo.html_url);
+                await Launcher.Default.OpenAsync(repo.HtmlUrl);
             }
         }
         catch (Exception ex)

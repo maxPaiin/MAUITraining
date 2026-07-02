@@ -10,19 +10,19 @@
     
     <Grid RowDefinitions="Auto,*" Margin="10">
         <VerticalStackLayout Grid.Row="0" Spacing="10">
-                <Entry Placeholder="input keyword" 
-                       Text="{Binding SearchText}" 
+                <Entry Placeholder="input keyword"
+                       Text="{Binding SearchText}"
                        Margin="5"
-                       HorizontalOptions="FillAndExpand"/>
+                       HorizontalOptions="Fill"/>
             <Picker
                 Title="Which sort"
                 ItemsSource="{Binding SortOptions}"
                 SelectedItem="{Binding SelectedSort}" />
                 
-             <Button Text="Search" Command="{Binding SearchCommand}" 
-                        IsEnabled="{Binding isSearchEnabled}" 
+             <Button Text="Search" Command="{Binding SearchCommand}"
+                        IsEnabled="{Binding IsSearchEnabled}"
                         Margin="5"
-                        HorizontalOptions="FillAndExpand"/>   
+                        HorizontalOptions="Fill"/>
         </VerticalStackLayout>
 
         
@@ -33,23 +33,39 @@
                 
                 <CollectionView.EmptyView>
                     <Label Text="no data view"
-                           IsVisible="{Binding isShowNoDataMessage}"
+                           IsVisible="{Binding IsShowNoDataMessage}"
                            HorizontalOptions="Center"
-                           VerticalOptions="CenterAndExpand"
-                           TextColor="Gray"
+                           VerticalOptions="Center"
+                           TextColor="{StaticResource GitHubTextMuted}"
                            FontSize="16"/>
                 </CollectionView.EmptyView>
                 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="5" Margin="5" BorderColor="Gray" InputTransparent="True">
-                            <VerticalStackLayout>
-                                <Label Text="{Binding owner.login, StringFormat='ownerName: {0}'}" />
-                                <Label Text="{Binding name, StringFormat='name: {0}'}" />
-                                <Label Text="{Binding stargazers_count, StringFormat='stargazersCount: {0}'}" />
-                                <Label Text="{Binding forks_count, StringFormat='forksCount: {0}'}"/>
+                        <Border Padding="12" Margin="5"
+                                BackgroundColor="{StaticResource GitHubSurface}"
+                                Stroke="{StaticResource GitHubBorder}"
+                                StrokeThickness="1"
+                                InputTransparent="True">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="6" />
+                            </Border.StrokeShape>
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Owner.Login, StringFormat='ownerName: {0}'}"
+                                       TextColor="{StaticResource GitHubTextMuted}"
+                                       FontSize="12" />
+                                <Label Text="{Binding Name, StringFormat='name: {0}'}"
+                                       TextColor="{StaticResource GitHubAccent}"
+                                       FontAttributes="Bold"
+                                       FontSize="16" />
+                                <Label Text="{Binding StargazersCount, StringFormat='stargazersCount: {0}'}"
+                                       TextColor="{StaticResource GitHubTextMuted}"
+                                       FontSize="12" />
+                                <Label Text="{Binding ForksCount, StringFormat='forksCount: {0}'}"
+                                       TextColor="{StaticResource GitHubTextMuted}"
+                                       FontSize="12" />
                             </VerticalStackLayout>
-                        </Frame>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -57,7 +73,6 @@
             <ProgressBar
                 Progress="{Binding LoadingProgress}"
                 IsVisible="{Binding IsLoading}"
-                ProgressColor="Blue"
                 HeightRequest="5" />
         </Grid>
         

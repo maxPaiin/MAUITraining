@@ -1,8 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace Pojo
 {
     public class Owner
     {
-        public string login { get; set; }
+        [JsonPropertyName("login")]
+        public string? Login { get; set; }
     }
 }
-

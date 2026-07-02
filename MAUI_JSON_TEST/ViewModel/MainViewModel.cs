@@ -1,10 +1,9 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using MAUI_JSON_TEST.GitHubService;
 using Pojo;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 using Microsoft.Maui.Storage;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
@@ -16,40 +15,50 @@ namespace MAUI_JSON_TEST.ViewModel
         private readonly Service _service = new();
         public ObservableCollection<Respond> Repositories { get; } = new();
         public List<string> SortOptions { get; } = new() { "stars", "forks", "help-wanted-issues", "updated" };
-        private string _selectedSort;
-        
+
         public MainViewModel()
         {
-            SelectedSort = Preferences.Get("selected_sort",SortOptions.First());
-            SearchText = Preferences.Get("search_text",string.Empty);
-            isShowNoDataMessage = true;
+            _selectedSort = Preferences.Get("selected_sort", SortOptions.First());
+            SearchText = Preferences.Get("search_text", string.Empty);
+            IsShowNoDataMessage = true;
             SearchCommand = new Command(async () => await SearchAsync());
         }
-        
+
+        private string _selectedSort;
         public string SelectedSort
         {
             get => _selectedSort;
             set
             {
+                if (_selectedSort == value)
+                {
+                    return;
+                }
                 _selectedSort = value;
                 Preferences.Set("selected_sort", value);
                 OnPropertyChanged(nameof(SelectedSort));
             }
         }
-        private string _searchText;
+
+        private string _searchText = string.Empty;
         public string SearchText
         {
             get => _searchText;
             set
             {
+                if (_searchText == value)
+                {
+                    return;
+                }
                 _searchText = value;
-                Preferences.Set("search_text",value);
-                isSearchEnabled = !string.IsNullOrWhiteSpace(value) && value.All(c => c <= 127 && c != ' ');
+                Preferences.Set("search_text", value);
+                OnPropertyChanged(nameof(SearchText));
+                IsSearchEnabled = !string.IsNullOrWhiteSpace(value) && value.All(c => c <= 127 && c != ' ');
             }
         }
 
         private bool _isSearchEnabled;
-        public bool isSearchEnabled
+        public bool IsSearchEnabled
         {
             get => _isSearchEnabled;
             set
@@ -57,7 +66,7 @@ namespace MAUI_JSON_TEST.ViewModel
                 if (_isSearchEnabled != value)
                 {
                     _isSearchEnabled = value;
-                    OnPropertyChanged(nameof(isSearchEnabled));
+                    OnPropertyChanged(nameof(IsSearchEnabled));
                 }
             }
         }
@@ -66,11 +75,8 @@ namespace MAUI_JSON_TEST.ViewModel
         private async Task SearchAsync()
         {
             IsLoading = true;
-            if (IsLoading)
-            {
-                isShowNoDataMessage = false;
-            }
-            
+            IsShowNoDataMessage = false;
+
             Repositories.Clear();
             try
             {
@@ -80,8 +86,9 @@ namespace MAUI_JSON_TEST.ViewModel
                     Repositories.Add(repo);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine($"Search failed: {ex}");
                 var snackbar = Snackbar.Make(
                     "can't connect try again",
                     async () => await SearchAsync(),
@@ -92,10 +99,7 @@ namespace MAUI_JSON_TEST.ViewModel
             finally
             {
                 IsLoading = false;
-                if (!IsLoading || Repositories.Count == 0)
-                {
-                    isShowNoDataMessage = true;
-                }
+                IsShowNoDataMessage = Repositories.Count == 0;
             }
         }
 
@@ -114,7 +118,7 @@ namespace MAUI_JSON_TEST.ViewModel
 
         public double LoadingProgress
         {
-            get=>_loadingProgress;
+            get => _loadingProgress;
             set
             {
                 if (_loadingProgress != value)
@@ -127,7 +131,7 @@ namespace MAUI_JSON_TEST.ViewModel
 
         private bool _isShowNoDataMessage;
 
-        public bool isShowNoDataMessage
+        public bool IsShowNoDataMessage
         {
             get => _isShowNoDataMessage;
             set
@@ -135,12 +139,12 @@ namespace MAUI_JSON_TEST.ViewModel
                 if (_isShowNoDataMessage != value)
                 {
                     _isShowNoDataMessage = value;
-                    OnPropertyChanged(nameof(isShowNoDataMessage));
+                    OnPropertyChanged(nameof(IsShowNoDataMessage));
                 }
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 

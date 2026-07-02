@@ -42,4 +42,16 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <!-- GitHub Dark palette (Primer) -->
+    <Color x:Key="GitHubCanvas">#0d1117</Color>
+    <Color x:Key="GitHubSurface">#161b22</Color>
+    <Color x:Key="GitHubSurfaceRaised">#21262d</Color>
+    <Color x:Key="GitHubBorder">#30363d</Color>
+    <Color x:Key="GitHubText">#e6edf3</Color>
+    <Color x:Key="GitHubTextMuted">#8b949e</Color>
+    <Color x:Key="GitHubAccent">#58a6ff</Color>
+    <Color x:Key="GitHubGreen">#238636</Color>
+    <Color x:Key="GitHubYellow">#e3b341</Color>
+    <Color x:Key="GitHubDanger">#f85149</Color>
 </ResourceDictionary>

@@ -1,72 +1,82 @@
-A small .NET MAUI sample/test project that demonstrates basic UI, platform support, and integration scenarios for Android, iOS, macOS (Mac Catalyst), and Windows. This repository is intended for experimentation, learning, and automated tests of MAUI features.
-Contents / Intent
+# MAUI_JSON_TEST — GitHub Repository Search
 
-    Lightweight sample app used for verifying .NET MAUI setup, building, and running on supported platforms.
-    Minimal UI and example pages that exercise navigation, controls, and platform-specific behavior.
-    Optionally contains unit/integration tests (if a test project is present).
+A .NET MAUI sample app that searches GitHub repositories and renders the results in a GitHub-dark-themed list. Built as a training project for exploring MAUI fundamentals: MVVM data binding, calling a REST API, JSON deserialization with `System.Text.Json`, and app-wide theming with XAML resource dictionaries.
 
-Supported platforms
+## What it does
 
-    Android
-    iOS (device/simulator — requires a macOS build host and Xcode)
-    macOS (Mac Catalyst)
-    Windows
+- Search GitHub repositories by keyword via the [GitHub Search API](https://docs.github.com/rest/search/search#search-repositories) (no authentication; subject to the unauthenticated rate limit of 10 search requests/minute).
+- Sort results by `stars`, `forks`, `help-wanted-issues`, or `updated` (top 10 results shown).
+- Tap a result to open the repository in the system browser.
+- Search keyword and sort choice persist across app restarts (`Preferences`).
+- Download progress bar while fetching; Snackbar with a Retry action on network failure.
+- GitHub Dark UI throughout, using the [Primer](https://primer.style) color palette (`#0d1117` canvas, `#161b22` cards, `#58a6ff` accent, `#238636` buttons). The app forces dark mode regardless of system theme.
 
-Prerequisites
+## Project structure
 
-    .NET SDK (recommended: current supported .NET version that includes MAUI; install the latest supported SDK)
-    .NET MAUI workloads:
-        Install via: dotnet workload install maui
-    Platform-specific tooling:
-        Android: Android SDK & emulator or device (Android SDK, Android SDK Command-line Tools, and an emulator)
-        iOS/macOS: Xcode (macOS only)
-        Windows: Visual Studio with MAUI support or the appropriate MSVC toolchain
-    Recommended IDEs:
-        Visual Studio 2022/2023 (Windows) with Mobile development and .NET MAUI workload
-        Visual Studio for Mac (macOS)
-        Or use the .NET CLI for command-line builds
+```
+MAUI_JSON_TEST/
+├── MainPage.xaml(.cs)          # Single page: search bar, sort picker, results list
+├── ViewModel/
+│   └── MainViewModel.cs        # MVVM view model (INotifyPropertyChanged, ICommand)
+├── Model/
+│   ├── GitHubService/
+│   │   └── Service.cs          # HttpClient call to the GitHub Search API
+│   └── Pojo/
+│       ├── Respond.cs          # Repository item DTO ([JsonPropertyName] mapping)
+│       └── Owner.cs            # Repository owner DTO
+├── Resources/Styles/
+│   ├── Colors.xaml             # Color palette incl. GitHub Dark (Primer) colors
+│   └── Styles.xaml             # Implicit control styles (dark values use the palette)
+└── Platforms/                  # Android / iOS / Mac Catalyst / Windows bootstrap
+```
 
-For full setup instructions and troubleshooting, see the official docs: https://learn.microsoft.com/dotnet/maui
-Quick start — using Visual Studio (recommended)
+There is no test project.
 
-    Open the solution (*.sln) in Visual Studio.
-    Restore packages automatically (Visual Studio does this on load).
-    Select a target platform (Android emulator, iOS simulator, macOS, or Windows).
-    Build and run (F5) or deploy to a device/emulator.
+## Tech stack
 
-Quick start — using the CLI
+- .NET 8 (SDK `8.0.408` pinned in `global.json`)
+- .NET MAUI, single-project targeting `net8.0-android`, `net8.0-ios`, `net8.0-maccatalyst`, and `net8.0-windows10.0.19041.0` (Windows target only when building on Windows)
+- [CommunityToolkit.Maui](https://github.com/CommunityToolkit/Maui) — Snackbar
+- `System.Text.Json` for deserialization
 
-    Restore dependencies:
-        dotnet restore
-    Build:
-        dotnet build -c Debug
-    To run or deploy, use Visual Studio or platform-specific publish/launch commands. Example publish (Android):
-        dotnet publish -f net.0-android -c Release -o ./publish/android Replace <n> with the target .NET major version used by this project (e.g., net7.0 or net8.0) as configured in the project files.
+## Getting started
 
-Note: dotnet run is not always supported for all MAUI targets via the CLI; Visual Studio provides the easiest deploy experience.
-Running tests
+### Prerequisites
 
-If the repository includes test projects:
+- .NET SDK 8.0.4xx
+- MAUI workloads: `dotnet workload install maui`
+- Platform tooling:
+  - **Android** — Android SDK plus an emulator or device
+  - **iOS / Mac Catalyst** — macOS with full Xcode installed (Command Line Tools alone are not enough; check `xcode-select -p`)
+  - **Windows** — Visual Studio 2022 with the .NET MAUI workload
 
-    Run unit tests with:
-        dotnet test
-    Or open the test project in Visual Studio and run tests via Test Explorer.
+### Build & run
 
-Project structure (typical)
+```bash
+dotnet restore
 
-    src/ or MAUITraining/ — main MAUI app (App.xaml, MainPage.xaml, platform folders)
-    tests/ — unit and integration tests (if present)
-    README.md — this file
+# Android
+dotnet build MAUI_JSON_TEST/MAUI_JSON_TEST.csproj -f net8.0-android
+dotnet build MAUI_JSON_TEST/MAUI_JSON_TEST.csproj -f net8.0-android -t:Run   # deploy to a running emulator/device
 
-Adjust directories above to match this repo's layout.
-Common issues & troubleshooting
+# Mac Catalyst (requires Xcode)
+dotnet build MAUI_JSON_TEST/MAUI_JSON_TEST.csproj -f net8.0-maccatalyst -t:Run
 
-    "Missing workload" errors: run dotnet workload install maui.
-    Android emulator or device not found: ensure Android SDK and platform tools are installed, and an emulator is running (or a device is connected and authorized).
-    iOS/macOS build errors: builds for Apple platforms require Xcode and a macOS environment.
-    NuGet package restore failures: verify network access and run dotnet restore --no-cache if needed.
+# Windows (on Windows)
+dotnet build MAUI_JSON_TEST/MAUI_JSON_TEST.csproj -f net8.0-windows10.0.19041.0 -t:Run
+```
 
-Contributing
+Or open `MAUI_JSON_TEST.sln` in Visual Studio / Rider, pick a target, and run.
 
-    Create issues for bugs or feature requests.
-    Open pull requests for fixes or improvements. Keep changes small and include a short description of what and why.
+## Known limitations
+
+- The Search button is disabled for queries containing spaces or non-ASCII characters, so multi-word and CJK searches are not possible.
+- The search query is not URL-encoded before being appended to the request URL; characters like `&` or `#` will break the query.
+- The progress bar only advances when the API response includes a `Content-Length` header; GitHub often streams chunked responses, in which case it stays at 0 until completion.
+- Results are fixed at 10 per search with no paging.
+
+## Troubleshooting
+
+- `Missing workload` errors → `dotnet workload install maui`
+- Apple targets fail with *"Could not find a valid Xcode app bundle"* → install full Xcode and run `sudo xcode-select -s /Applications/Xcode.app`
+- No results plus a Retry Snackbar right after several searches → you likely hit the unauthenticated GitHub rate limit; wait a minute and retry
