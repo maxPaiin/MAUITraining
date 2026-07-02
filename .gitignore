@@ -1,0 +1,23 @@
+# Build results
+bin/
+obj/
+
+# .NET / MSBuild
+*.user
+*.userosscache
+*.suo
+*.cache
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio
+.vs/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+*.DotSettings.user
+
+# macOS
+.DS_Store
